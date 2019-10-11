@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="parkingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="30" />
+          <Property Name="LastNanem" Type="varchar" MaxLength="30" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="30" />
+          <Property Name="City" Type="varchar" MaxLength="30" />
+          <Property Name="State" Type="varchar" MaxLength="30" />
+          <Property Name="Country" Type="varchar" MaxLength="30" />
+          <Property Name="NSS" Type="varchar" MaxLength="30" />
+          <Property Name="Infonavit" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="LoginTracking">
+          <Key>
+            <PropertyRef Name="LoginId" />
+          </Key>
+          <Property Name="LoginId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemUserId" Type="int" Nullable="false" />
+          <Property Name="LoginDate" Type="datetime" />
+          <Property Name="TotalOnlineTime" Type="time" Precision="7" />
+          <Property Name="IpAddress" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemUsers">
+          <Key>
+            <PropertyRef Name="SystemUserId" />
+          </Key>
+          <Property Name="SystemUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee" Type="int" Nullable="false" />
+          <Property Name="LoginUserName" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="LoginPassword" Type="nvarchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__LoginTrac__Syste__15502E78">
+          <End Role="SystemUsers" Type="Self.SystemUsers" Multiplicity="1" />
+          <End Role="LoginTracking" Type="Self.LoginTracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUsers">
+              <PropertyRef Name="SystemUserId" />
+            </Principal>
+            <Dependent Role="LoginTracking">
+              <PropertyRef Name="SystemUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SystemUse__Emplo__1273C1CD">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="SystemUsers" Type="Self.SystemUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="SystemUsers">
+              <PropertyRef Name="Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="parkingModelStoreContainer">
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginTracking" EntityType="Self.LoginTracking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemUsers" EntityType="Self.SystemUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__LoginTrac__Syste__15502E78" Association="Self.FK__LoginTrac__Syste__15502E78">
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+            <End Role="LoginTracking" EntitySet="LoginTracking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SystemUse__Emplo__1273C1CD" Association="Self.FK__SystemUse__Emplo__1273C1CD">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="parkingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LastNanem" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NSS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Infonavit" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SystemUsers" Relationship="Self.FK__SystemUse__Emplo__1273C1CD" FromRole="Employee" ToRole="SystemUsers" />
+        </EntityType>
+        <EntityType Name="LoginTracking">
+          <Key>
+            <PropertyRef Name="LoginId" />
+          </Key>
+          <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemUserId" Type="Int32" Nullable="false" />
+          <Property Name="LoginDate" Type="DateTime" Precision="3" />
+          <Property Name="TotalOnlineTime" Type="Time" Precision="7" />
+          <Property Name="IpAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SystemUser" Relationship="Self.FK__LoginTrac__Syste__15502E78" FromRole="LoginTracking" ToRole="SystemUsers" />
+        </EntityType>
+        <EntityType Name="SystemUser">
+          <Key>
+            <PropertyRef Name="SystemUserId" />
+          </Key>
+          <Property Name="SystemUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee" Type="Int32" Nullable="false" />
+          <Property Name="LoginUserName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LoginPassword" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee1" Relationship="Self.FK__SystemUse__Emplo__1273C1CD" FromRole="SystemUsers" ToRole="Employee" />
+          <NavigationProperty Name="LoginTrackings" Relationship="Self.FK__LoginTrac__Syste__15502E78" FromRole="SystemUsers" ToRole="LoginTracking" />
+        </EntityType>
+        <Association Name="FK__SystemUse__Emplo__1273C1CD">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="SystemUsers" Type="Self.SystemUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="SystemUsers">
+              <PropertyRef Name="Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginTrac__Syste__15502E78">
+          <End Role="SystemUsers" Type="Self.SystemUser" Multiplicity="1" />
+          <End Role="LoginTracking" Type="Self.LoginTracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUsers">
+              <PropertyRef Name="SystemUserId" />
+            </Principal>
+            <Dependent Role="LoginTracking">
+              <PropertyRef Name="SystemUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="parkingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="LoginTrackings" EntityType="Self.LoginTracking" />
+          <EntitySet Name="SystemUsers" EntityType="Self.SystemUser" />
+          <AssociationSet Name="FK__SystemUse__Emplo__1273C1CD" Association="Self.FK__SystemUse__Emplo__1273C1CD">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginTrac__Syste__15502E78" Association="Self.FK__LoginTrac__Syste__15502E78">
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+            <End Role="LoginTracking" EntitySet="LoginTrackings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="parkingModelStoreContainer" CdmEntityContainer="parkingEntities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="parkingModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastNanem" ColumnName="LastNanem" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="NSS" ColumnName="NSS" />
+                <ScalarProperty Name="Infonavit" ColumnName="Infonavit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginTrackings">
+            <EntityTypeMapping TypeName="parkingModel.LoginTracking">
+              <MappingFragment StoreEntitySet="LoginTracking">
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="SystemUserId" ColumnName="SystemUserId" />
+                <ScalarProperty Name="LoginDate" ColumnName="LoginDate" />
+                <ScalarProperty Name="TotalOnlineTime" ColumnName="TotalOnlineTime" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemUsers">
+            <EntityTypeMapping TypeName="parkingModel.SystemUser">
+              <MappingFragment StoreEntitySet="SystemUsers">
+                <ScalarProperty Name="SystemUserId" ColumnName="SystemUserId" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="LoginUserName" ColumnName="LoginUserName" />
+                <ScalarProperty Name="LoginPassword" ColumnName="LoginPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
