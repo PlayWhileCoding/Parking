@@ -80,10 +80,10 @@ namespace Parking.Controllers
             }
             catch (Exception exc)
             {
-                return View("Error");
-                 
+                ViewBag.Message = "Mensaje de prueba";
+               
             }
-
+            return View();
         }
 
         private async Task<bool> ValidateLogin()
