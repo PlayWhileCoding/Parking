@@ -80,10 +80,10 @@ namespace Parking.Controllers
             }
             catch (Exception exc)
             {
-                ViewBag.Message = "Mensaje de prueba";
-               
+                ViewBag.Message = "Internar server error, but you'll be redirected anyway." + exc.Message;
+                return RedirectToAction("Index","Home");   
             }
-            return View();
+            //return View();
         }
 
         private async Task<bool> ValidateLogin()
