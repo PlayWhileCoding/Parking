@@ -4,16 +4,7 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Main/Index.cshtml";
 }
-<script>
-    var current = angular.module('AppMain', []);
 
-    current.controller('AdminController', ['$scope', function ($scope) {
-        $scope.currentPageName = window.location.pathname;
-        $scope.Employee = {};
-
-    }]);
-
-</script>
 <style>
     .form-control{
         text-align:center;
@@ -25,120 +16,138 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="container col-md-6">
-    <div class="form-group">
-        <input class="form-control" ng-model="Employee.Name" placeholder="Name" />
-    </div>
-</div>
 
-    <label>{{Employee.Name}}</label>
-
-
-    @*<div class="form-horizontal">
-            <h4>Employee</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-horizontal" ng-cloak ng-app="AppMain">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row" ng-show="!completed">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-6" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                     @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.LastNanem, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.LastNanem, htmlAttributes: new { @class = "control-label col-6" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.LastNanem, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.LastNanem, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-6" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-6" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-6" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-6" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-6" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-6" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-6" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.NSS, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.NSS, htmlAttributes: new { @class = "control-label col-6" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.NSS, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.NSS, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Infonavit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Infonavit, htmlAttributes: new { @class = "control-label col-6" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Infonavit, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Infonavit, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            <div class="form-group">
+            
+            <div class="form-group col-md-6">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <a class="btn btn-success" ng-click="completed = !completed">  Next Steps</a>
                 </div>
             </div>
+
+            @*<div class="form-group col-md-6">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>*@
+        </div>
+        <div class="row" ng-show="completed">
 
-
-
-
+            <h4>Upload documents</h4>
+            <br />
+            <div class="container">
+                <div class="form-group col-md-6">
+                    <label>Upload File 1</label>
+                    <input type="file" />
+                </div>
+            </div>
+        </div>
+        </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="modal">
+    <div class="modal-header">
+
+    </div>
+    <div class="modal-body">
+        <div>
+            <label><b>{{}}</b></label>
+        </div>
+    </div>
+    <div class="modal-footer">
+
+    </div>
+</div>
+
+<div ng-show="completed">
+    <button class="btn btn-success" ng-click="completed = !completed">Back to previous step</button>
 </div>
