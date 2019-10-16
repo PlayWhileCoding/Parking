@@ -19,30 +19,30 @@ namespace Parking.Controllers
         {
             try
             {
-                List<Employee> test = new List<Employee>();
-                test.Add(new Employee()
-                {
-                    FirstName = "Aldo",
-                    Address = "SFDA315",
-                    Age = 26,
-                    City = "Santa Catarina",
-                    Country = "México",
-                    Email = "acaaguirre",
-                    Infonavit = "NOPE",
-                    LastNanem = "Castillo Aguirre",
-                    NSS = "NOSE",
-                    PhoneNumber = "8125139407",
-                    State = "Monterrey"
-                });
-                return View(test);
-                //db.Employees.ToList();
+                //List<Employee> test = new List<Employee>();
+                //test.Add(new Employee()
+                //{
+                //    FirstName = "Aldo",
+                //    Address = "SFDA315",
+                //    Age = 26,
+                //    City = "Santa Catarina",
+                //    Country = "México",
+                //    Email = "acaaguirre",
+                //    Infonavit = "NOPE",
+                //    LastNanem = "Castillo Aguirre",
+                //    NSS = "NOSE",
+                //    PhoneNumber = "8125139407",
+                //    State = "Monterrey"
+                //});
+                //return View(test);
+                return View(db.Employees.ToList());
             }
             catch (Exception)
             {
                 return View();
                 throw;
             }
-            return View(db.Employees.ToList());
+            
         }
 
         // GET: Employees/Details/5

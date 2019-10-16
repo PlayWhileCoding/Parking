@@ -21,8 +21,9 @@
         var current = angular.module('AppMain', []);
 
     current.controller('AdminController', ['$scope', function ($scope) {
-        $scope.currentPageName = window.location.pathname;
-        $scope.Employee = {};
+        $scope.currentPageName = window.location.pathname;        
+        $scope.Employee = @Html.Raw(Json.Encode(Model));
+        $scope.completed = false;
 
     }]);
 
@@ -30,7 +31,7 @@
 </head>
 <body ng-app="AppMain" ng-controller="AdminController">
     <nav  class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">{{currentPageName}}</a>
+        <h5 class="navbar-brand" href="#">Parking</h5>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -50,9 +51,9 @@
                         <a class="dropdown-item" href="#">Separated link</a>
                     </div>
                 </li>              
-                <li class="nav-item">
+                @*<li class="nav-item">
                     <a class="nav-link" href="~/Employees/Index">Employees</a>
-                </li>
+                </li>*@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Lots</a>
                 </li>
